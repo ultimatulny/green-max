@@ -1,0 +1,59 @@
+.page {
+  display: flex;
+  min-height: 100dvh;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background: var(--bg-main);
+}
+
+.card {
+  width: 412px;
+  max-width: 100%;
+  padding: 30px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #1d1e22;
+}
+
+.mark {
+  display: flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 13px;
+  background: var(--accent);
+  color: #fff;
+  margin: 0 auto;
+}
+
+.card h1 {
+  margin: 20px 0 0;
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: -0.6px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.subtitle {
+  margin: 0 0 28px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 21px;
+  text-align: center;
+}
+
+.hint {
+  margin: 22px 0 0;
+  color: var(--text-muted);
+  font-size: 11px;
+  line-height: 17px;
+}
+
+@media (width < 420px) {
+  .card {
+    padding: 26px 22px;
+  }
+}

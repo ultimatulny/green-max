@@ -1,0 +1,50 @@
+.area {
+  flex-shrink: 0;
+
+  padding: 8px 18px 12px;
+  padding-bottom: max(12px, env(safe-area-inset-bottom));
+
+  background: transparent;
+  border: none;
+}
+.composer {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  min-height: 46px;
+  padding: 4px 5px 4px 14px;
+  background: #202125;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  width: min(100%, 700px);
+  margin-inline: auto;
+}
+.composer:focus-within {
+  border-color: rgb(255 255 255 / 12%);
+}
+.composer textarea {
+  display: block;
+  flex: 1;
+  min-width: 0;
+  min-height: 36px;
+  max-height: 102px;
+  padding: 7px 0;
+  resize: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 15px;
+  line-height: 22px;
+  overflow-y: auto;
+}
+
+.composer textarea::placeholder {
+  color: #92949b;
+}
+.error {
+  margin: 0 2px 8px;
+  color: var(--danger);
+  font-size: 12px;
+  line-height: 1.5;
+}
