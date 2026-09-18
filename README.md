@@ -93,6 +93,33 @@ npm run format:check
 npm run format
 ```
 
+## Docker
+
+Сборка образа и запуск на хосте с установленным Docker:
+
+```bash
+docker build -t green-max .
+docker run -d --name green-max --restart unless-stopped -p 8080:80 green-max
+```
+
+Приложение будет доступно по адресу `http://<IP-хоста>:8080`.
+Для подключения домена направьте reverse proxy на порт `8080` и настройте HTTPS на нём.
+
+Dockerfile собирает приложение на Node.js 24 через `npm ci` и `npm run build`.
+Готовую статику раздаёт nginx; Node.js и зависимости сборки в итоговый образ не попадают.
+
+Если нужен другой адрес GREEN-API, передайте его во время сборки:
+
+```bash
+docker build -t green-max \
+  --build-arg VITE_GREEN_API_URL=https://3100.api.green-api.com .
+```
+
+Без аргумента используется адрес по умолчанию из приложения. Переменные `VITE_*`
+[подставляются при сборке Vite](https://vite.dev/guide/env-and-mode), поэтому изменение
+адреса требует пересборки образа. Файлы `.env*` исключены из Docker-контекста.
+Данные авторизации вводятся в интерфейсе приложения.
+
 ## Хранение данных
 
 Credentials, чаты, выбранный чат и сообщения сохраняются в `sessionStorage` текущей вкладки
