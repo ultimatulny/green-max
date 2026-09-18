@@ -14,6 +14,9 @@ export function App() {
     queryClient.clear()
     useChatStore.getState().reset()
     useMessageStore.getState().reset()
+    useSessionStore.persist.clearStorage()
+    useChatStore.persist.clearStorage()
+    useMessageStore.persist.clearStorage()
   }
 
   return (
