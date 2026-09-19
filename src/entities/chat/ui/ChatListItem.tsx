@@ -27,9 +27,22 @@ export function ChatListItem({
       className={styles.item}
       data-active={active}
       aria-current={active ? 'true' : undefined}
+      aria-label={
+        chat.unreadCount > 0
+          ? `${chat.title}. Непрочитанных сообщений: ${chat.unreadCount}`
+          : chat.title
+      }
+      title={chat.title}
       onClick={onSelect}
     >
-      <ChatAvatar chat={chat} />
+      <span className={styles.avatar}>
+        <ChatAvatar chat={chat} />
+        {chat.unreadCount > 0 && (
+          <span className={`${styles.unreadBadge} ${styles.compactBadge}`} aria-hidden="true">
+            {chat.unreadCount > 99 ? '99+' : chat.unreadCount}
+          </span>
+        )}
+      </span>
       <span className={styles.info}>
         <span className={styles.top}>
           <span className={styles.title}>{chat.title}</span>

@@ -24,10 +24,32 @@
   line-height: 30px;
 }
 
+.header h1,
+.footer > span,
+.empty h2,
+.empty p,
+.empty button {
+  opacity: var(--sidebar-details-opacity, 1);
+  transition: opacity var(--sidebar-transition, 0s);
+}
+
+.header,
+.footer {
+  overflow: hidden;
+}
+
+.header h1,
+.footer > span {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 .list {
   min-height: 0;
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .empty {
@@ -76,4 +98,25 @@
   border-top: 1px solid var(--border);
   color: var(--text-muted);
   font-size: 11px;
+}
+
+@container chat-sidebar (width <= 80px) {
+  .header,
+  .footer {
+    justify-content: center;
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+
+  .header h1,
+  .footer > span,
+  .empty h2,
+  .empty p,
+  .empty button {
+    display: none;
+  }
+
+  .empty {
+    padding: 16px 8px;
+  }
 }

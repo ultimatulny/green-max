@@ -5,6 +5,7 @@
   align-items: center;
   gap: 12px;
   padding: 10px 12px;
+  overflow: hidden;
   border: 0;
   background: transparent;
   color: var(--text-primary);
@@ -21,12 +22,19 @@
   background: rgba(255, 255, 255, 0.065);
 }
 
+.avatar {
+  position: relative;
+  flex: 0 0 auto;
+}
+
 .info {
   display: flex;
   min-width: 0;
   flex: 1;
   flex-direction: column;
   gap: 5px;
+  opacity: var(--sidebar-details-opacity, 1);
+  transition: opacity var(--sidebar-transition, 0s);
 }
 
 .top {
@@ -97,4 +105,30 @@
 .preview > svg {
   flex-shrink: 0;
   color: var(--text-muted);
+}
+
+.compactBadge {
+  position: absolute;
+  right: -4px;
+  bottom: -2px;
+  opacity: calc(1 - var(--sidebar-details-opacity, 1));
+  transition: opacity var(--sidebar-transition, 0s);
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--bg-sidebar);
+}
+
+@container chat-sidebar (width <= 80px) {
+  .item {
+    justify-content: center;
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+
+  .info {
+    display: none;
+  }
+
+  .compactBadge {
+    display: inline-flex;
+  }
 }
