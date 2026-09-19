@@ -39,9 +39,19 @@ export function ChatListItem({
             </time>
           )}
         </span>
-        <span className={styles.preview}>
-          {outgoing && <Check size={15} aria-label="Отправлено" />}
-          <span>{preview || 'Пока нет сообщений'}</span>
+        <span className={styles.bottom}>
+          <span className={styles.preview}>
+            {outgoing && <Check size={15} aria-label="Отправлено" />}
+            <span>{preview || 'Пока нет сообщений'}</span>
+          </span>
+          {chat.unreadCount > 0 && (
+            <span
+              className={styles.unreadBadge}
+              aria-label={`Непрочитанных сообщений: ${chat.unreadCount}`}
+            >
+              {chat.unreadCount > 99 ? '99+' : chat.unreadCount}
+            </span>
+          )}
         </span>
       </span>
     </button>

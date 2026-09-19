@@ -70,7 +70,7 @@ export function mapIncomingNotification(body: unknown): { chat: Chat; message: M
     (phone ? `+${phone}` : `Чат ${senderData.chatId}`)
 
   return {
-    chat: { chatId: senderData.chatId, phone, title },
+    chat: { chatId: senderData.chatId, phone, title, unreadCount: 0 },
     message: {
       id: body.idMessage,
       chatId: senderData.chatId,

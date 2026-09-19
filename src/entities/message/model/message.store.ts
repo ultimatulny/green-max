@@ -5,7 +5,7 @@ import type { Message } from './message.types'
 
 interface MessageState {
   messages: Message[]
-  addMessage: (message: Message) => void
+  addMessage: (message: Message) => boolean
   reset: () => void
 }
 
@@ -13,7 +13,9 @@ export const useMessageStore = create<MessageState>()(
   persist(
     (set) => ({
       messages: [],
-      addMessage: (message) =>
+      addMessage: (message) => {
+        let added = false
+
         set((state) => {
           if (
             state.messages.some((item) => item.id === message.id && item.chatId === message.chatId)
@@ -21,8 +23,12 @@ export const useMessageStore = create<MessageState>()(
             return state
           }
 
+          added = true
           return { messages: [...state.messages, message] }
-        }),
+        })
+
+        return added
+      },
       reset: () => set({ messages: [] }),
     }),
     {

@@ -33,7 +33,11 @@ export function useReceiveNotifications(credentials: Credentials) {
           chatStore.upsertChat(incoming.chat)
         }
 
-        useMessageStore.getState().addMessage(incoming.message)
+        const added = useMessageStore.getState().addMessage(incoming.message)
+
+        if (added) {
+          useChatStore.getState().incrementUnread(incoming.message.chatId)
+        }
       }
 
       await deleteNotification(credentials, notification.receiptId, signal)

@@ -33,7 +33,7 @@ export function useCreateChatMutation() {
         )
       }
 
-      return { chatId: account.chatId, phone, title: formatPhoneNumber(phone) }
+      return { chatId: account.chatId, phone, title: formatPhoneNumber(phone), unreadCount: 0 }
     },
     onSuccess: (chat) => {
       if (useSessionStore.getState().credentials !== credentials) return
