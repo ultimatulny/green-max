@@ -11,23 +11,23 @@ interface MessageState {
 
 export const useMessageStore = create<MessageState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       messages: [],
+
       addMessage: (message) => {
-        let added = false
+        const exists = get().messages.some(
+          (item) => item.id === message.id && item.chatId === message.chatId,
+        )
 
-        set((state) => {
-          if (
-            state.messages.some((item) => item.id === message.id && item.chatId === message.chatId)
-          ) {
-            return state
-          }
+        if (exists) {
+          return false
+        }
 
-          added = true
-          return { messages: [...state.messages, message] }
-        })
+        set((state) => ({
+          messages: [...state.messages, message],
+        }))
 
-        return added
+        return true
       },
       reset: () => set({ messages: [] }),
     }),
