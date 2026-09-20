@@ -36,9 +36,19 @@ export function useCreateChatMutation() {
       return { chatId: account.chatId, phone, title: formatPhoneNumber(phone), unreadCount: 0 }
     },
     onSuccess: (chat) => {
-      if (useSessionStore.getState().credentials !== credentials) return
-      useChatStore.getState().upsertChat(chat)
-      useChatStore.getState().setActiveChat(chat.chatId)
+      const currentCredentials = useSessionStore.getState().credentials
+
+      if (
+        currentCredentials?.idInstance !== credentials?.idInstance ||
+        currentCredentials?.apiTokenInstance !== credentials?.apiTokenInstance
+      ) {
+        return
+      }
+
+      const chatStore = useChatStore.getState()
+
+      chatStore.upsertChat(chat)
+      chatStore.setActiveChat(chat.chatId)
     },
   })
 }

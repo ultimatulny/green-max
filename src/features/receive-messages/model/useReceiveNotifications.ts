@@ -15,11 +15,14 @@ export function useReceiveNotifications(credentials: Credentials) {
     queryKey: greenApiKeys.notifications(credentials.idInstance),
     queryFn: async ({ signal }) => {
       const notification = await receiveNotification(credentials, signal)
+      const currentCredentials = useSessionStore.getState().credentials
 
       if (
         !notification ||
         signal.aborted ||
-        useSessionStore.getState().credentials !== credentials
+        !currentCredentials ||
+        currentCredentials.idInstance !== credentials.idInstance ||
+        currentCredentials.apiTokenInstance !== credentials.apiTokenInstance
       ) {
         return null
       }

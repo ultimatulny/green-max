@@ -23,8 +23,20 @@ export function useSendMessageMutation(chatId: string) {
       return { id: data.idMessage, text, timestamp: Date.now() }
     },
     onSuccess: (message) => {
-      if (useSessionStore.getState().credentials !== credentials) return
-      useMessageStore.getState().addMessage({ ...message, chatId, direction: 'outgoing' })
+      const currentCredentials = useSessionStore.getState().credentials
+
+      if (
+        currentCredentials?.idInstance !== credentials?.idInstance ||
+        currentCredentials?.apiTokenInstance !== credentials?.apiTokenInstance
+      ) {
+        return
+      }
+
+      useMessageStore.getState().addMessage({
+        ...message,
+        chatId,
+        direction: 'outgoing',
+      })
     },
   })
 }
